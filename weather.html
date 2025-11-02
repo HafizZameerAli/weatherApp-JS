@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="w idth=device-width, initial-scale=1.0">
+    <title>My Weather App</title>
+</head>
+
+<body>
+    <div>
+        <label>City Name</label>
+        <input type="text" id="cityName">
+        <button onclick="handleSubmit()">Submit</button>
+    </div>
+    <div>
+        <h1 id="result"></h1>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const inputValue = document.querySelector("#cityName")
+        const myResult = document.querySelector("#result").innerText
+        console.log(myResult)
+        const API_KEY = '0909502029355100ef3b5bec522eac16'
+        const handleSubmit = () => {
+            console.log("city name = ", inputValue.value)
+            
+
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${API_KEY}&units=metric`)
+                .then(function (response) {
+                    // handle success
+
+                    console.log(response.data.main.temp);
+                    document.getElementById('result').innerText =`Your ${inputValue.value} weather is ${response.data.main.temp}`
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                    document.getElementById('result').innerText = error.response.data.message
+                })
+        }
+
+        handleSubmit()
+    </script>
+
+</body>
+
+</html>
