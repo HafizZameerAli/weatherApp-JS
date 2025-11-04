@@ -5,17 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="w idth=device-width, initial-scale=1.0">
     <title>My Weather App</title>
+    <style>
+     .div {
+        display: flex;
+        justify-content: center;
+        bottom: 50px;
+        background-color: blue;
+     }
+     .body{
+    background-image: url(weather\ img.jpg);
+     }
+
+    </style>
 </head>
 
-<body bgcolor="blue"> <center>
-    <div>
-        <label>City Name</label>
-        <input type="text" id="cityName">
-        <button onclick="handleSubmit()">Submit</button>
-    </div>
-    <div>
-        <h1 id="result"></h1>
-    </div>
+<body class="body">
+    <center>
+        <div id="div">
+            <label>City Name</label>
+            <input type="text" id="cityName">
+            <button onclick="handleSubmit()">Submit</button>
+        </div>
+        <div>
+            <h1 id="result"></h1>
+        </div>
     </center>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -26,14 +39,14 @@
         const API_KEY = '0909502029355100ef3b5bec522eac16'
         const handleSubmit = () => {
             console.log("city name = ", inputValue.value)
-            
+
 
             axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${API_KEY}&units=metric`)
                 .then(function (response) {
                     // handle success
 
                     console.log(response.data.main.temp);
-                    document.getElementById('result').innerText =`Your ${inputValue.value} weather is ${response.data.main.temp}`
+                    document.getElementById('result').innerText = `Your ${inputValue.value} weather is ${response.data.main.temp}`
                 })
                 .catch(function (error) {
                     // handle error
